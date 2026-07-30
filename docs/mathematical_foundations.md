@@ -20,7 +20,7 @@ Rather than estimating volatility, TFI estimates how **easy or difficult** it is
 Returns are
 
 $$
-r_t=\log\left(\frac{P_t}{P_{t-\Delta}}\right).
+r_t=\log\bigl(P_t / P_{t-\Delta}\bigr).
 $$
 
 Robustly standardized returns are
@@ -36,14 +36,14 @@ The empirical cumulant generating function is
 
 $$
 \widehat{\Lambda}(\theta)=
-\log\left(\frac{1}{n}\sum_i e^{\theta z_i}\right)
+\log\bigl((1/n)\sum_i e^{\theta z_i}\bigr)
 $$
 
 The empirical rate function is obtained using the Legendre–Fenchel transform
 
 $$
 \widehat{I}(x)=
-\sup_{\theta}\left\{\theta x-\widehat{\Lambda}(\theta)\right\}
+\sup_{\theta}\bigl(\theta x-\widehat{\Lambda}(\theta)\bigr)
 $$
 
 Downside and upside tail costs are
