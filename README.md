@@ -72,6 +72,23 @@ python -m crypto_risk_index.cli.main leverage \
   --debug
 ```
 
+For a bounded live health check, repeat the debug calculation and store cycle summaries in a session-local temporary table:
+
+```bash
+crypto-risk-index leverage \
+  --dsn "$PM_DB_DSN" \
+  --asset BTC \
+  --lookback-minutes 1800 \
+  --normalization-min-history 50 \
+  --debug \
+  --tail-rows 3 \
+  --repeat 3 \
+  --sleep-s 60 \
+  --temp-log
+```
+
+The temporary table is named `crypto_risk_index_lfi_health_debug` and is dropped when the process exits.
+
 ## Required Data Shapes
 
 ### Leverage Fragility

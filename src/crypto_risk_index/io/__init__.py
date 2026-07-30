@@ -1,3 +1,3 @@
-from crypto_risk_index.io.postgres import load_derivatives_venue_metrics
+from crypto_risk_index.io.postgres import connect, load_derivatives_venue_metrics
 
-__all__ = ["load_derivatives_venue_metrics"]
+__all__ = ["connect", "load_derivatives_venue_metrics"]
