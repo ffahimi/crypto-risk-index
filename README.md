@@ -11,6 +11,20 @@ This package contains pure pandas/numpy implementations of the recent BTC risk i
 
 The core package does not require Postgres, ZMQ, Telegram, Polymarket, or any production server paths. Postgres is an optional debug input adapter.
 
+## Mathematical Foundations
+
+The full derivation and interpretation notes are included in
+[docs/mathematical_foundations.md](docs/mathematical_foundations.md).
+
+At a high level:
+
+- **TFI** estimates directional tail fragility from empirical Legendre-Fenchel rate surfaces. Low tail cost and collapsing slow-vs-fast rate surfaces indicate that large moves are becoming statistically cheaper.
+- **OTI** is a price-flow toxicity proxy inspired by VPIN. It compares short-horizon signed flow imbalance, persistence, and venue dispersion to infer whether buy-side or sell-side order flow is becoming toxic.
+- **LFI** combines perpetual futures funding, basis, open-interest growth, and liquidation pressure into long-side and short-side leverage fragility scores.
+- **JRI** composes directional structure fragility from TFI with flow toxicity from OTI to estimate whether downside or upside jump risk is dominant.
+
+These diagnostics are designed as market-state variables, not as standalone trading signals.
+
 ## Install
 
 ```bash
