@@ -19,34 +19,34 @@ Rather than estimating volatility, TFI estimates how **easy or difficult** it is
 
 Returns are
 
-\[
+$$
 r_t=\log\left(\frac{P_t}{P_{t-\Delta}}\right).
-\]
+$$
 
 Robustly standardized returns are
 
-\[
+$$
 z_t=
 \frac{r_t-m_t}{s_t+\varepsilon},
-\]
+$$
 
 where the scale is preferably the median absolute deviation.
 
 The empirical cumulant generating function is
 
-\[
+$$
 \widehat\Lambda(\theta)
 =
 \log
 \left(
-\frac1n
+\frac{1}{n}
 \sum_i e^{\theta z_i}
 \right).
-\]
+$$
 
 The empirical rate function is obtained using the Legendre–Fenchel transform
 
-\[
+$$
 \widehat I(x)
 =
 \sup_\theta
@@ -54,41 +54,41 @@ The empirical rate function is obtained using the Legendre–Fenchel transform
 \theta x-
 \widehat\Lambda(\theta)
 \}.
-\]
+$$
 
 Downside and upside tail costs are
 
-\[
+$$
 C^-_k=I(-k),
-\]
+$$
 
-\[
+$$
 C^+_k=I(+k).
-\]
+$$
 
 Low values indicate a weak statistical barrier for large moves.
 
 Rate-surface collapse is
 
-\[
+$$
 Collapse^-=
 I_{slow}(-3)-I_{fast}(-3),
-\]
+$$
 
 with the mirrored definition for the upside.
 
 Asymmetry is
 
-\[
+$$
 A_3=I(+3)-I(-3).
-\]
+$$
 
 Velocity is
 
-\[
+$$
 V^-=
 -(I_t(-3)-I_{t-h}(-3)).
-\]
+$$
 
 The package combines normalized tail cost, collapse, asymmetry and velocity into a directional fragility score.
 
@@ -112,55 +112,55 @@ OTI measures whether aggressive trading is overwhelming available liquidity.
 
 Classical VPIN computes
 
-\[
+$$
 VPIN
 =
-\frac1N
+\frac{1}{N}
 \sum
 \frac{|V^B-V^S|}{V_B}.
-\]
+$$
 
 The package extends this into directional measures.
 
 Buy toxicity
 
-\[
+$$
 BuyTox=
-\frac1N
+\frac{1}{N}
 \sum
 \max(0,S_b),
-\]
+$$
 
 Sell toxicity
 
-\[
+$$
 SellTox=
-\frac1N
+\frac{1}{N}
 \sum
 \max(0,-S_b).
-\]
+$$
 
 Liquidity pressure compares aggressive volume to resting depth
 
-\[
+$$
 SellPressure
 =
 \frac{AggSell}{BidDepth}.
-\]
+$$
 
 Bid depletion
 
-\[
+$$
 BidDepletion=
 \frac{Depth_{old}-Depth_{new}}{Depth_{old}}.
-\]
+$$
 
 Spread stress
 
-\[
+$$
 Spread=
 \frac{Ask-Bid}{Mid}.
-\]
+$$
 
 The downside OTI combines sell toxicity, sell pressure, bid depletion, replenishment failure and spread stress.
 
@@ -186,40 +186,40 @@ LFI measures whether derivatives positioning is crowded and beginning to unwind.
 
 Funding is normalized
 
-\[
+$$
 F^{8h}
 =
 F
-\frac8h.
-\]
+\frac{8}{h}.
+$$
 
 Basis
 
-\[
+$$
 Basis=
 \frac{Perp-Spot}{Spot}.
-\]
+$$
 
 Open interest change
 
-\[
+$$
 \Delta OI=
 \frac{OI_t-OI_{t-h}}{OI_{t-h}}.
-\]
+$$
 
 Leverage density
 
-\[
+$$
 OIToVolume=
 \frac{OI}{Volume_{24h}}.
-\]
+$$
 
 Long crowding
 
-\[
+$$
 LC^-=
 w_1F+w_2Basis+w_3\Delta OI+w_4OIToVolume.
-\]
+$$
 
 Short crowding mirrors the signs.
 
@@ -232,12 +232,12 @@ Long unwind combines
 
 Finally
 
-\[
+$$
 LFI^-=
 0.45C^-+
 0.35U^-+
 0.20C^-U^-.
-\]
+$$
 
 with the mirrored upside score.
 
@@ -261,13 +261,13 @@ Recommended reading
 
 The package composes the previous layers
 
-\[
+$$
 J^-=
 w_TTFI^-+
 w_LLFI^-+
 w_OOTI^-+
 w_ITFI^-LFI^-OTI^-.
-\]
+$$
 
 The upside score is analogous.
 
