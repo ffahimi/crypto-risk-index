@@ -35,25 +35,15 @@ where the scale is preferably the median absolute deviation.
 The empirical cumulant generating function is
 
 $$
-\widehat\Lambda(\theta)
-=
-\log
-\left(
-\frac{1}{n}
-\sum_i e^{\theta z_i}
-\right).
+\widehat{\Lambda}(\theta)=
+\log\left(\frac{1}{n}\sum_i e^{\theta z_i}\right)
 $$
 
 The empirical rate function is obtained using the Legendre–Fenchel transform
 
 $$
-\widehat I(x)
-=
-\sup_\theta
-\{
-\theta x-
-\widehat\Lambda(\theta)
-\}.
+\widehat{I}(x)=
+\sup_{\theta}\left\{\theta x-\widehat{\Lambda}(\theta)\right\}
 $$
 
 Downside and upside tail costs are
@@ -284,4 +274,3 @@ To estimate probabilities, fit models using future MAE/MFE labels with walk-forw
 - He et al. Fundamentals of Perpetual Futures.
 - OKX API and Funding documentation.
 - Bybit Funding and Mark Price documentation.
-
