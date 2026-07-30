@@ -1,6 +1,6 @@
 # crypto-risk-index
 
-Crypto market risk indices for research and live diagnostics.
+A few indices to measure momentary and mid-term tail risk on BTC.
 
 This package contains pure pandas/numpy implementations of the recent BTC risk indices:
 
