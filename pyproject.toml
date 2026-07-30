@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crypto-risk-index"
+version = "0.1.0"
+description = "Crypto market risk indices for tail fragility, order-flow toxicity, directional jump risk, and leverage crowding."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Monte Markov" }]
+dependencies = [
+  "numpy>=1.24",
+  "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg2-binary>=2.9"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+crypto-risk-index = "crypto_risk_index.cli.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
