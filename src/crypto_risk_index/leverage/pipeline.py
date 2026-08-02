@@ -67,31 +67,29 @@ def regime_from_percentile(pct: Any) -> str | None:
 
 
 def robust_trailing(series: pd.Series, lookback: int, min_history: int, clip: float) -> pd.DataFrame:
-    vals = pd.to_numeric(series, errors="coerce")
+    vals = pd.to_numeric(series, errors="coerce").to_numpy(dtype=float)
+    out = np.full((len(vals), 6), np.nan, dtype=float)
 
-    def calc(arr: np.ndarray) -> np.ndarray:
-        cur = arr[-1]
-        hist = arr[:-1]
+    for i, cur in enumerate(vals):
+        start = max(0, i - lookback)
+        hist = vals[start:i]
         hist = hist[np.isfinite(hist)]
+        out[i, 4] = float(hist.size)
         if not np.isfinite(cur) or hist.size < min_history:
-            return np.asarray([np.nan, np.nan, np.nan, np.nan, float(hist.size), np.nan], dtype=float)
+            continue
         med = float(np.median(hist))
         mad = float(np.median(np.abs(hist - med)))
         scale = max(1.4826 * mad, EPS)
         raw_z = (float(cur) - med) / scale
-        pct = 100.0 * float(np.count_nonzero(hist <= cur)) / float(hist.size)
-        return np.asarray([raw_z, float(np.clip(raw_z, -clip, clip)), med, scale, float(hist.size), pct], dtype=float)
+        out[i, 0] = raw_z
+        out[i, 1] = float(np.clip(raw_z, -clip, clip))
+        out[i, 2] = med
+        out[i, 3] = scale
+        out[i, 5] = 100.0 * float(np.count_nonzero(hist <= cur)) / float(hist.size)
 
-    roll = vals.rolling(lookback + 1, min_periods=min_history + 1)
     return pd.DataFrame(
-        {
-            "raw_z": roll.apply(lambda a: calc(a)[0], raw=True),
-            "clipped_z": roll.apply(lambda a: calc(a)[1], raw=True),
-            "median": roll.apply(lambda a: calc(a)[2], raw=True),
-            "mad": roll.apply(lambda a: calc(a)[3], raw=True),
-            "count": roll.apply(lambda a: calc(a)[4], raw=True),
-            "percentile": roll.apply(lambda a: calc(a)[5], raw=True),
-        },
+        out,
+        columns=("raw_z", "clipped_z", "median", "mad", "count", "percentile"),
         index=series.index,
     )
 
